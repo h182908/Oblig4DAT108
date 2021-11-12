@@ -29,14 +29,14 @@ public class Schema {
 
 	public Boolean isLastNameValid() {
 		Pattern p = Pattern.compile("\\s*\\p{Lu}\\p{Ll}+\\s*");
-		Matcher m = p.matcher(this.first_name);
+		Matcher m = p.matcher(this.last_name);
 		return m.matches();
 	}
 
 	public Boolean isPhoneNumberValid() {
-		Pattern p = Pattern.compile("\s*\\+?\s*(\\d\s*){8}\s*");
-		Matcher m = p.matcher(this.first_name);
-		return true;
+		Pattern p = Pattern.compile("\\s*\\+?\\s*(\\d\\s*){8}\\s*");
+		Matcher m = p.matcher(this.phone_number);
+		return m.matches();
 	}
 
 	public Boolean isPasswordValid() {
@@ -51,7 +51,9 @@ public class Schema {
 	}
 	
 	public Boolean isGenderValid() {
-		return true;
+		if(gender.equals("mann") || gender.equals("kvinne"))
+			return true;
+		return false;
 	}
 
 	public Boolean isValidated() {
