@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import database.Users;
 import database.UsersDAO;
+import utils.EscapeHTML;
 import utils.LoginUtil;
 import utils.Password;
 import utils.PasswordUtil;
@@ -32,8 +33,8 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("mobil");
-		String password = request.getParameter("passord");
+		String username = EscapeHTML.escape(request.getParameter("mobil"));
+		String password = EscapeHTML.escape(request.getParameter("passord"));
 		
 		if(username != null && password != null) {
 			Users user = userDAO.getUser(username);

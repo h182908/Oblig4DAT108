@@ -13,12 +13,12 @@ public class Schema {
 	public String gender;
 
 	public Schema(HttpServletRequest request) {
-		this.first_name = request.getParameter("fornavn");
-		this.last_name = request.getParameter("etternavn");
-		this.phone_number = request.getParameter("mobil");
-		this.password = request.getParameter("passord");
-		this.password2 = request.getParameter("passordRepetert");
-		this.gender = request.getParameter("kjonn");
+		this.first_name = EscapeHTML.escape(request.getParameter("fornavn"));
+		this.last_name = EscapeHTML.escape(request.getParameter("etternavn"));
+		this.phone_number = EscapeHTML.escape(request.getParameter("mobil"));
+		this.password = EscapeHTML.escape(request.getParameter("passord"));
+		this.password2 = EscapeHTML.escape(request.getParameter("passordRepetert"));
+		this.gender = EscapeHTML.escape(request.getParameter("kjonn"));
 	}
 
 	public Boolean isFirstNameValid() {
