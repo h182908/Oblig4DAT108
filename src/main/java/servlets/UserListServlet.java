@@ -33,7 +33,17 @@ public class UserListServlet extends HttpServlet {
 		
 		List<Users> users = userDAO.getUsers();
 		
-		if(user != null) {
+		if(user != null && users != null) {
+			users.sort((Users a, Users b) -> {
+				char A = a.getFirst_name().charAt(0);
+				char B = b.getFirst_name().charAt(0);
+				if(A == B) {
+					A = a.getLast_name().charAt(0);
+					B = b.getLast_name().charAt(0);
+				}
+				return A > B ? 1 : -1;
+			});
+			
 			request.setAttribute("userlist", users);
 			request.setAttribute("logoutUrl", LOGOUT_URL);
 			request.getRequestDispatcher("WEB-INF/jsp/deltagerliste.jsp").forward(request, response);
