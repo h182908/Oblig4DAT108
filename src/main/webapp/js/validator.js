@@ -3,6 +3,7 @@ class PasswordValidator {
     this.re_lower = /[a-z]+/;
     this.re_upper = /[A-Z]+/;
     this.re_number = /[1-9]+/;
+    this.validate = this.validate.bind(this);
   }
 
   validate(pwd) {
@@ -19,25 +20,23 @@ class FORMController {
   constructor(pwd, rep) {
     this.pwd = pwd;
     this.rep = rep;
+    this.validator = new PasswordValidator();
+    this.sjekkPassordStyrke = this.sjekkPassordStyrke.bind(this);
     this.sjekkPassordLike = this.sjekkPassordLike.bind(this);
   }
 
   sjekkPassordStyrke(event) {
     const validity = event.target.validity;
-    const validator = new PasswordValidator();
 
-    if (validity.valid && validator.validate(event.target.value)) {
+    if (validity.valid && this.validator.validate(event.target.value)) {
       event.target.classList.add('mediumPassword');
     } else {
       event.target.classList.remove('mediumPassword');
     }
   }
 
-  sjekk() {}
-
   sjekkPassordLike() {
-    console.log(this.pwd);
-    if (pwd.value != rep.value) {
+    if (this.pwd.value != this.rep.value) {
       this.rep.setCustomValidity('Repetert passord er feil!');
     } else {
       this.rep.setCustomValidity('');
