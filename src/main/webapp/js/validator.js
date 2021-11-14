@@ -19,6 +19,7 @@ class FORMController {
   constructor(pwd, rep) {
     this.pwd = pwd;
     this.rep = rep;
+    this.sjekkPassordLike = this.sjekkPassordLike.bind(this);
   }
 
   sjekkPassordStyrke(event) {
@@ -32,18 +33,21 @@ class FORMController {
     }
   }
 
+  sjekk() {}
+
   sjekkPassordLike() {
-    if (true) {
-      console.log('passord er ikke like');
+    console.log(this.pwd);
+    if (pwd.value != rep.value) {
+      this.rep.setCustomValidity('Repetert passord er feil!');
     } else {
-      console.log('passord er like');
+      this.rep.setCustomValidity('');
     }
   }
 
   run() {
-    pwd.addEventListener('input', this.sjekkPassordStyrke);
-    // pwd.addEventListener('input', this.sjekkPassordLike);
-    // rep.addEventListener('input', this.sjekkPassordLike);
+    this.pwd.addEventListener('input', this.sjekkPassordStyrke);
+    this.pwd.addEventListener('input', this.sjekkPassordLike);
+    this.rep.addEventListener('input', this.sjekkPassordLike);
   }
 }
 
