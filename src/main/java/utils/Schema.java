@@ -21,42 +21,42 @@ public class Schema {
 		this.gender = EscapeHTML.escape(request.getParameter("kjonn"));
 	}
 
-	public Boolean isFirstNameValid() {
+	public synchronized Boolean isFirstNameValid() {
 		Pattern p = Pattern.compile("\\s*\\p{Lu}\\p{Ll}+(\\s+\\p{Lu}\\p{Ll}+)*\\s*");
 		Matcher m = p.matcher(this.first_name);
 		return m.matches();
 	}
 
-	public Boolean isLastNameValid() {
+	public synchronized Boolean isLastNameValid() {
 		Pattern p = Pattern.compile("\\s*\\p{Lu}\\p{Ll}+\\s*");
 		Matcher m = p.matcher(this.last_name);
 		return m.matches();
 	}
 
-	public Boolean isPhoneNumberValid() {
+	public synchronized Boolean isPhoneNumberValid() {
 		Pattern p = Pattern.compile("\\s*\\+?\\s*(\\d\\s*){8}\\s*");
 		Matcher m = p.matcher(this.phone_number);
 		return m.matches();
 	}
 
-	public Boolean isPasswordValid() {
+	public synchronized Boolean isPasswordValid() {
 		if(this.password.length() >= 8)
 			return true;
 		
 		return false;
 	}
 
-	public Boolean isRepeatedPasswordValid() {
+	public synchronized Boolean isRepeatedPasswordValid() {
 		return this.password.equals(this.password2);
 	}
 	
-	public Boolean isGenderValid() {
+	public synchronized Boolean isGenderValid() {
 		if(gender.equals("mann") || gender.equals("kvinne"))
 			return true;
 		return false;
 	}
 
-	public Boolean isValidated() {
+	public synchronized Boolean isValidated() {
 		return isFirstNameValid() && isLastNameValid() && isPhoneNumberValid() && isPasswordValid()
 				&& isRepeatedPasswordValid() && isGenderValid();
 	}

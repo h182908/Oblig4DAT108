@@ -10,14 +10,13 @@ public class LoginUtil {
 		logOut(request);
 		
 		HttpSession session = request.getSession(true);
-		session = request.getSession(true);
 		session.setAttribute("user", user);
-		session.setMaxInactiveInterval(8);
+		session.setMaxInactiveInterval(3600);
 	}
 	
 	public static boolean isLoggedIn(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
-		return session != null && session.getAttribute("username") != null;
+		return session != null && session.getAttribute("user") != null;
 	}
 	
 	public static void logOut(HttpServletRequest request) {

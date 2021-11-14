@@ -7,6 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="icon" href="data:," />
     <link href="main.css" rel="stylesheet" type="text/css" />
+    <script src='js/validator.js' type="text/javascript" defer></script>
     <title>Påmelding</title>
   </head>
   <body>

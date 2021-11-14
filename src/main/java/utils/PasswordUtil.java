@@ -13,7 +13,7 @@ public class PasswordUtil {
 	/**
 	 * @return et tilfeldig generert 16 bytes salt ved å bruke SHA1PRNG
 	 */
-	public static String generateRandomSalt() {
+	public synchronized static String generateRandomSalt() {
 	    SecureRandom sr;
 	    byte[] salt = new byte[16];
 		try {
@@ -44,7 +44,7 @@ public class PasswordUtil {
 	 * @param salt
 	 * @return en 64 tegn lang HEX-streng som representerer en 32 byte/256 bit hash.
 	 */
-	public static String hashWithSalt(String passord, String salt) { 
+	public synchronized static String hashWithSalt(String passord, String salt) { 
 		
 		if (passord == null || salt == null) { //Burde validert skikkelig!!
 			throw new IllegalArgumentException();
@@ -74,7 +74,7 @@ public class PasswordUtil {
 	 * @param passordhash - Det "lagrete" passordet 
 	 * @return om passordet matcher
 	 */
-	public static boolean validateWithSalt(
+	public synchronized static boolean validateWithSalt(
 			String passord, String salt, String passwordhash) {
 		
 		if (passord == null || salt == null || passwordhash == null) { // Burde validert skikkelig!!

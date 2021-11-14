@@ -27,7 +27,7 @@ public class LogoutServlet extends HttpServlet {
 	private UsersDAO userDAO;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession(false);
+		LoginUtil.logOut(request);
 		request.setAttribute("loginUrl", LOGIN_URL);
 		request.getRequestDispatcher("WEB-INF/jsp/ferdig.jsp").forward(request, response);
 	}

@@ -41,6 +41,7 @@ public class LoginServlet extends HttpServlet {
 			
 			if(user != null) {
 				Password pass = user.getPassword();
+				
 				if(pass != null && PasswordUtil.validateWithSalt(password, pass.getSalt(), pass.getHash())) {
 					LoginUtil.logIn(request, user);
 					

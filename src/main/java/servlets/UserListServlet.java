@@ -5,7 +5,9 @@ import static utils.UrlMappings.LOGIN_URL;
 import static utils.UrlMappings.USERLIST_URL;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -28,22 +30,15 @@ public class UserListServlet extends HttpServlet {
 	@EJB
 	private UsersDAO userDAO;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Users user = (Users) request.getSession().getAttribute("user");
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		List<Users> users = userDAO.getUsers();
 		
-		if(user != null && users != null) {
-			users.sort((Users a, Users b) -> {
-				char A = a.getFirst_name().charAt(0);
-				char B = b.getFirst_name().charAt(0);
-				if(A == B) {
-					A = a.getLast_name().charAt(0);
-					B = b.getLast_name().charAt(0);
-				}
-				return A > B ? 1 : -1;
-			});
-			
+		if(LoginUtil.isLoggedIn(request) && users != null) {
+			users = users.stream()
+					.sorted(Comparator.comparing(Users::getFirst_name)
+							.thenComparing(Comparator.comparing(Users::getLast_name)))
+					.collect(Collectors.toList());
+
 			request.setAttribute("userlist", users);
 			request.setAttribute("logoutUrl", LOGOUT_URL);
 			request.getRequestDispatcher("WEB-INF/jsp/deltagerliste.jsp").forward(request, response);

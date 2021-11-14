@@ -43,6 +43,7 @@ public class RegistrationServlet extends HttpServlet {
 			
 			if(userDAO.saveNewUser(user)) {
 				LoginUtil.logIn(request, user);
+				
 				request.getSession().removeAttribute("schema");
 				
 				response.sendRedirect(CONFIRMATION_URL);

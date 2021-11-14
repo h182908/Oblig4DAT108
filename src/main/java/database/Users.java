@@ -33,27 +33,27 @@ public class Users {
 	
 	public Users() {}
 	
-	public String getFirst_name () {
+	public synchronized String getFirst_name () {
 		return first_name;
 	}
 	
-	public String getLast_name() {
+	public synchronized String getLast_name() {
 		return last_name;
 	}
 	
-	public String getPhone_number() {
+	public synchronized String getPhone_number() {
 		return phone_number;
 	}
 	
-	public String getGender() {
+	public synchronized String getGender() {
 		return gender;
 	}
 	
-	public Password getPassword() {
+	public synchronized Password getPassword() {
 		return password;
 	}
 	
-	public String toString() {
+	public synchronized String toString() {
 		return String.format("%s, %s, %s, %s, %s", first_name, last_name, phone_number, password, gender);
 	}
 }

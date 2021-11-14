@@ -1,7 +1,7 @@
 package utils;
 
 public class EscapeHTML {
-	public static String escape(String s) {
+	public synchronized static String escape(String s) {
 		String resultat = s;
 		resultat = resultat.replaceAll("<", "&lt;");
 		resultat = resultat.replaceAll(">", "&gt;");
